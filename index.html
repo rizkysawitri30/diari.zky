@@ -1556,7 +1556,7 @@
             opacity: 0.7;
             will-change: transform;
         }
-
+        /*
         .watermark-text .wm-main {
             display: block;
             font-size: clamp(60px, 10vw, 140px);
@@ -1564,29 +1564,152 @@
             line-height: 1.5;
             opacity: 1;
             
-            /* 👈 FONT CORMORANT GARAMOND */
             font-family: 'Cormorant Garamond', serif;
             font-weight: 900;
             font-stretch: expanded;
             
-            /* 👈 GRADIENT WARNA */
             background: linear-gradient(135deg, #1C1C1C, #C38D9E, #E8A87C);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             padding: 4px 0;
             
-            /* 👈 TEXT SHADOW UNTUK EFEK 3D */
             filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.4));
             
-            /* ✨ PILIH SALAH SATU ANIMASI DI BAWAH INI */
-            
-            /* 1. ANIMASI LENGKAP (SEMUA EFEK) */
             animation: shimmerMain 4s ease-in-out infinite, 
                     floatMain 6s ease-in-out infinite,
                     pulseGlow 3s ease-in-out infinite,
                     textRotate 8s ease-in-out infinite;
         }
+        */
+.watermark-text .wm-main {
+    display: block;
+    font-size: clamp(60px, 10vw, 140px);
+    letter-spacing: 12px;
+    line-height: 1.5;
+    opacity: 1;
+    
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 900;
+    font-stretch: expanded;
+    
+    /* Gradient warna */
+    background: linear-gradient(135deg, #1C1C1C, #C38D9E, #E8A87C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding: 4px 0;
+    
+    /* Efek 3D dengan multiple text-shadow */
+    text-shadow: 
+        0 1px 0 rgba(195, 141, 158, 0.3),
+        0 2px 0 rgba(195, 141, 158, 0.25),
+        0 3px 0 rgba(195, 141, 158, 0.2),
+        0 4px 0 rgba(195, 141, 158, 0.15),
+        0 5px 0 rgba(195, 141, 158, 0.1),
+        0 8px 15px rgba(0,0,0,0.3);
+    
+    /* Transisi untuk efek hover yang smooth */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Perspective untuk efek 3D */
+    perspective: 500px;
+    transform-style: preserve-3d;
+    
+    /* Menonaktifkan semua animasi */
+    animation: none !important;
+}
+
+/* Efek HOVER 3D */
+.watermark-text .wm-main:hover {
+    /* Transformasi 3D - tanpa gerakan, hanya efek kedalaman */
+    transform: 
+        translateZ(30px) 
+        scale(1.08);
+    
+    /* Text-shadow lebih dalam untuk efek 3D yang lebih kuat */
+    text-shadow: 
+        0 1px 0 rgba(195, 141, 158, 0.4),
+        0 2px 0 rgba(195, 141, 158, 0.35),
+        0 3px 0 rgba(195, 141, 158, 0.3),
+        0 4px 0 rgba(195, 141, 158, 0.25),
+        0 5px 0 rgba(195, 141, 158, 0.2),
+        0 6px 0 rgba(195, 141, 158, 0.15),
+        0 7px 0 rgba(195, 141, 158, 0.1),
+        0 8px 25px rgba(0,0,0,0.5),
+        0 12px 40px rgba(195, 141, 158, 0.3);
+    
+    /* Filter untuk efek glow */
+    filter: drop-shadow(0 5px 25px rgba(195, 141, 158, 0.4))
+            drop-shadow(0 10px 50px rgba(232, 168, 124, 0.2));
+    
+    /* Letter spacing melebar sedikit */
+    letter-spacing: 15px;
+}
+
+/* Efek 3D alternatif - seperti timbul/emboss */
+.watermark-text .wm-main.emboss:hover {
+    transform: scale(1.05);
+    text-shadow: 
+        -1px -1px 0 rgba(255,255,255,0.3),
+        1px 1px 0 rgba(0,0,0,0.3),
+        0 0 20px rgba(195, 141, 158, 0.3);
+}
+
+/* Efek 3D alternatif - seperti neon */
+.watermark-text .wm-main.neon:hover {
+    transform: scale(1.05);
+    text-shadow: 
+        0 0 10px rgba(195, 141, 158, 0.5),
+        0 0 20px rgba(195, 141, 158, 0.3),
+        0 0 40px rgba(195, 141, 158, 0.2),
+        0 0 80px rgba(195, 141, 158, 0.1);
+    filter: drop-shadow(0 0 30px rgba(195, 141, 158, 0.3));
+}
+
+/* Efek 3D alternatif - seperti metalik */
+.watermark-text .wm-main.metalic:hover {
+    transform: scale(1.05) translateZ(20px);
+    text-shadow: 
+        0 1px 0 #b87a8c,
+        0 2px 0 #ae6d80,
+        0 3px 0 #a46074,
+        0 4px 0 #9a5368,
+        0 5px 0 #90465c,
+        0 6px 0 #863950,
+        0 7px 15px rgba(0,0,0,0.4);
+    background: linear-gradient(135deg, #E8A87C, #C38D9E, #1C1C1C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Support untuk browser */
+@supports (transform-style: preserve-3d) {
+    .watermark-text .wm-main {
+        transform-style: preserve-3d;
+    }
+    
+    .watermark-text .wm-main:hover {
+        transform: 
+            translateZ(40px) 
+            scale(1.1);
+    }
+}
+
+/* Responsif untuk mobile */
+@media (max-width: 768px) {
+    .watermark-text .wm-main {
+        font-size: clamp(40px, 8vw, 80px);
+        letter-spacing: 8px;
+    }
+    
+    .watermark-text .wm-main:hover {
+        transform: translateZ(20px) scale(1.05);
+        letter-spacing: 10px;
+    }
+}
+        
 
         .watermark-text .wm-sub {
             display: block;
@@ -3980,7 +4103,7 @@
                 <div class="banner-container">
                     <!-- WATERMARK TEKS DI BELAKANG FOTO -->
                     <div class="watermark-text">
-                        <span class="wm-main">SEMINAR</span>
+                        <span class="wm-main" data-text="SEMINAR">SEMINAR</span>
                         <br><br>
                         <span class="wm-sub">&nbsp;&nbsp;Pendidikan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Profesi&nbsp;Guru</span>
                     </div>                    
@@ -5906,10 +6029,10 @@
             <!-- ==================== HALAMAN: DETAIL REFLEKSI REFLEKSI MATA KULIAH PEMBALAJARAN KREATIF INOVATIF =================-->
             <div x-show="page === 'refleksiPKI'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div class="mb-8 animate-float-up">
-                    <h2 class="font-serif text-5xl text-charcoal flex items-center gap-3 border-l-4 border-accent pl-5 border-charcoal/20">Refleksi Mata Kuliah PPL Terbimbing</h2>
+                    <h2 class="font-serif text-5xl text-charcoal flex items-center gap-3 border-l-4 border-accent pl-5 border-charcoal/20">Refleksi Mata Kuliah Pembelajaran Kreatif Inovatif</h2>
                 </div>
                 <!-- SATU x-data untuk kedua kolom -->
-                 <div x-data="{ activeTab: 'lmsGM' }" class="grid md:grid-cols-2 gap-8 mb-10">
+                 <div x-data="{ activeTab: 'lmsPKI' }" class="grid md:grid-cols-2 gap-8 mb-10">
                     <!-- Kolom Kiri - Preview Dokumen -->
                      <div class="space-y-8">
                         <div class="identity-card profile-gradient-card-1 rounded-3xl p-6 border border-soft-gray relative overflow-hidden">
@@ -5918,43 +6041,43 @@
                             <div class="relative z-10">
                                 <!-- Tab Navigator untuk File -->
                                 <div class="flex flex-wrap gap-2 mb-4">
-                                    <button @click="activeTab = 'lmsGM'" class="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border border-soft-gray" :class="activeTab === 'lmsPPL' ? 'bg-gradient-to-r from-accent-pink/30 to-accent-purple/30 border-accent-purple/50 shadow-sm text-charcoal' : 'text-gray-500 hover:bg-[#FAF8F5]'">
+                                    <button @click="activeTab = 'lmsPKI'" class="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border border-soft-gray" :class="activeTab === 'lmsPKI' ? 'bg-gradient-to-r from-accent-pink/30 to-accent-purple/30 border-accent-purple/50 shadow-sm text-charcoal' : 'text-gray-500 hover:bg-[#FAF8F5]'">
                                         Lembar Kerja
                                     </button>
-                                    <button @click="activeTab = 'artefakGM'" class="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border border-soft-gray" :class="activeTab === 'artefakPPL1' ? 'bg-gradient-to-r from-accent-pink/30 to-accent-purple/30 border-accent-purple/50 shadow-sm text-charcoal' : 'text-gray-500 hover:bg-[#FAF8F5]'">
-                                        LK 4.3: Project Based
+                                    <button @click="activeTab = 'artefakPKI'" class="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border border-soft-gray" :class="activeTab === 'artefakPKI' ? 'bg-gradient-to-r from-accent-pink/30 to-accent-purple/30 border-accent-purple/50 shadow-sm text-charcoal' : 'text-gray-500 hover:bg-[#FAF8F5]'">
+                                        KB 4: Menemukan Masalah Pembelajaran
                                     </button>
                                 </div>
                                 <!-- Konten Preview File -->
                                  <div class="glass rounded-xl p-4 border border-soft-gray">
                                     <!-- LMS -->
-                                     <div x-show="activeTab === 'lmsGM'" x-transition:enter.duration.300ms>
+                                     <div x-show="activeTab === 'lmsPKI'" x-transition:enter.duration.300ms>
                                         <div class="flex items-center justify-between mb-3">
                                             <div>
                                                 <h4 class="text-sm font-semibold text-charcoal">LK 2 HASIL REFLEKSI PENGALAMAN BELAJAR</h4>
-                                                <p class="text-[10px] text-gray-400">Mata Kuliah: Praktik Pengalaman Lapangan (PPL) Terbimbing</p>
-                                            </div>
-                                            <a href="https://drive.google.com/file/d/.../view?usp=sharing" target="_blank" class="text-xs bg-gradient-to-r from-accent-pink to-accent-purple text-white px-3 py-1 rounded-full hover:opacity-90 transition">
+                                                <p class="text-[10px] text-gray-400">Mata Kuliah: Pembelajaran Kreatif Inovatif</p>
+                                            </div> 
+                                            <a href="https://drive.google.com/file/d/1H8tWp4_ma_GsMh2wNlmUgmOqXfftKC8f/view?usp=sharing" target="_blank" class="text-xs bg-gradient-to-r from-accent-pink to-accent-purple text-white px-3 py-1 rounded-full hover:opacity-90 transition">
                                                 Buka di Drive
                                             </a>
                                         </div>
                                         <div class="rounded-lg overflow-hidden border border-soft-gray" style="height: 500px;">
-                                            <iframe src="https://drive.google.com/file/d/.../preview" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                                            <iframe src="https://drive.google.com/file/d/1H8tWp4_ma_GsMh2wNlmUgmOqXfftKC8f/preview" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                     <!-- Artefak 1 -->
-                                     <div x-show="activeTab === 'artefakGM'" x-transition:enter.duration.300ms>
+                                     <div x-show="activeTab === 'artefakPKI'" x-transition:enter.duration.300ms>
                                         <div class="flex items-center justify-between mb-3">
                                             <div>
                                                 <h4 class="text-sm font-semibold text-charcoal">ARTEFAK HASIL REFLEKSI PENGALAMAN BELAJAR</h4>
-                                                <p class="text-[10px] text-gray-400">LK 4.3: Project Based</p>
+                                                <p class="text-[10px] text-gray-400">KB 4 Menemukan Masalah Pembelajaran untuk Merancang Pembelajaran KI</p>
                                             </div>
-                                            <a href="https://drive.google.com/file/d/.../view?usp=sharing" target="_blank" class="text-xs bg-gradient-to-r from-accent-pink to-accent-purple text-white px-3 py-1 rounded-full hover:opacity-90 transition">
+                                            <a href="https://drive.google.com/file/d/1TADFFcYA5Oa-aLoE_Qc5Opt1FE1sHi1u/view?usp=sharing" target="_blank" class="text-xs bg-gradient-to-r from-accent-pink to-accent-purple text-white px-3 py-1 rounded-full hover:opacity-90 transition">
                                                 Buka di Drive
                                             </a>
                                         </div>
                                         <div class="rounded-lg overflow-hidden border border-soft-gray" style="height: 500px;">
-                                            <iframe src="https://drive.google.com/file/d/.../preview" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                                            <iframe src="https://drive.google.com/file/d/1TADFFcYA5Oa-aLoE_Qc5Opt1FE1sHi1u/preview" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 </div>
@@ -5977,7 +6100,7 @@
                                 <h3 class="text-sm font-semibold text-accent-purple">Kesimpulan Refleksi</h3>
                             </div>
                             <p class="text-xs text-gray-700 mt-1" style="text-align: justify;">
-                                "..."
+                                "Melalui mata kuliah Pembelajaran Kreatif dan Inovatif, saya memperoleh pemahaman bahwa kualitas pembelajaran tidak hanya dibangun melalui penguasaan materi, tetapi juga melalui kemampuan merancang pengalaman belajar yang berpihak pada murid, kontekstual, dan terus berkembang melalui refleksi. Konsep scaffolding, GRR, TPACK, serta Penelitian Tindakan Kelas menjadi landasan yang memperkaya cara saya memandang proses pembelajaran. Ke depan, pemahaman ini akan menjadi pijakan untuk terus menghadirkan pembelajaran Informatika yang relevan dengan kebutuhan murid SMK dan perkembangan kompetensi abad ke-21."
                             </p>
                         </div>
                     </div>
@@ -5985,57 +6108,49 @@
                     <div class="space-y-8">
                         <div class="profile-gradient-card-3 rounded-2xl p-6 border border-soft-gray">
                             <div class="flex items-center gap-4 mb-4 border-b border-charcoal/20 pb-3">
-                                <h4 class="text-sm font-semibold text-charcoal" x-text="activeTab === 'lmsGM' ? 'Refleksi Pengalaman Belajar dalam Konteks Calon Guru' : 'Analisis Artefak LK 4.3: Project Based'"></h4>
+                                <h4 class="text-sm font-semibold text-charcoal" x-text="activeTab === 'lmsPKI' ? 'Refleksi Pengalaman Belajar dalam Konteks Calon Guru' : 'Refleksi Pengalaman Belajar dalam Konteks Calon Guru'"></h4>
                             </div>
                             <!-- Konten Refleksi Pengalaman Belajar -->
-                            <div x-show="activeTab === 'lmsGM'" x-transition:enter.duration.300ms>
+                            <div x-show="activeTab === 'lmsPKI'" x-transition:enter.duration.300ms>
                                 <div class="flex items-center gap-2">
                                     <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                                     <h3 class="text-sm font-semibold text-accent-purple">Connection</h3>
                                 </div>
                                 <p class="text-xs text-gray-600 leading-relaxed mb-2" style="text-align: justify;">
-                                    ...
+                                    Melalui mata kuliah Pembelajaran Kreatif dan Inovatif, saya memahami bahwa guru abad ke-21 perlu menghadirkan pembelajaran yang mampu mengembangkan keterampilan 4C (Critical Thinking, Communication, Collaboration, Creativity). Saya belajar bahwa keberhasilan pembelajaran tidak hanya ditentukan oleh penguasaan materi, tetapi juga oleh kemampuan merancang pengalaman belajar yang aktif, bermakna, dan relevan dengan kebutuhan murid.
                                 </p>
                                 <div class="bg-gradient-to-br from-accent-pink/10 to-accent-purple/10 rounded-xl p-4 border border-accent-pink/30 mb-2">
                                     <h3 class="text-xs font-semibold text-accent-purple" style="text-align: justify;">
-                                        ...
+                                        Fokus utama pembelajaran abad ke-21<br>Critical Thinking • Communication • Collaboration • Creativity
                                     </h3>
                                 </div>
-                                <p class="text-xs text-gray-600 leading-relaxed mb-2" style="text-align: justify;">
-                                    ...
-                                </p><br>
+                                <br>
                                 
                                 <div class="flex items-center gap-2">
                                     <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M8 3l4 8 5-5 5 15H2L8 3z"/></svg>
                                     <h3 class="text-sm font-semibold text-accent-purple">Challenge</h3>
                                 </div>
                                 <p class="text-xs text-gray-600 leading-relaxed mb-2" style="text-align: justify;">
-                                    ...
+                                    Refleksi ini menjadi ruang untuk melihat kembali kebiasaan mengajar yang selama ini saya lakukan, kemudian membandingkannya dengan strategi pembelajaran yang lebih adaptif terhadap kebutuhan murid.
                                 </p>
                                 <div class="grid sm:grid-cols-2 gap-2">
                                     <div class="flex items-start gap-2">
                                         <span class="text-accent-purple font-bold text-xs">01</span>
-                                        <p class="text-xs text-gray-600" style="text-align: justify">...</p>
+                                        <p class="text-xs text-gray-600" style="text-align: justify"><b>Scaffolding Bertahap</b><br>Bantuan belajar diberikan secara perlahan, dari bimbingan penuh menuju kemandirian murid melalui tahapan I Do – We Do – You Do Together – You Do Alone.</p>
                                     </div>
                                     <div class="flex items-start gap-2">
                                         <span class="text-accent-purple font-bold text-xs">02</span>
-                                        <p class="text-xs text-gray-600" style="text-align: justify">...</p>
+                                        <p class="text-xs text-gray-600" style="text-align: justify"><b>TPACK</b><br>Teknologi tidak hanya digunakan sebagai alat presentasi, tetapi sebagai sarana eksplorasi, kreativitas, dan pengalaman belajar yang lebih interaktif.</p>
                                     </div>
                                     <div class="flex items-start gap-2">
                                         <span class="text-accent-purple font-bold text-xs">03</span>
-                                        <p class="text-xs text-gray-600" style="text-align: justify">...</p>
+                                        <p class="text-xs text-gray-600" style="text-align: justify"><b>Design Thinking</b><br>Pendekatan kreatif dalam memecahkan masalah yang mendorong murid berpikir empatik, menghasilkan ide, dan merancang solusi.</p>
                                     </div>
                                     <div class="flex items-start gap-2">
-                                        <span class="text-accent-purple font-bold text-xs">03</span>
-                                        <p class="text-xs text-gray-600" style="text-align: justify">...</p>
+                                        <span class="text-accent-purple font-bold text-xs">04</span>
+                                        <p class="text-xs text-gray-600" style="text-align: justify"><b>Penilaian Formatif</b><br>Penilaian tidak hanya melihat hasil akhir, tetapi juga memperhatikan proses belajar dan perkembangan pemahaman murid.</p>
                                     </div>
                                 </div><br>
-                                <div class="bg-gradient-to-br from-accent-pink/10 to-accent-purple/10 rounded-xl p-4 border border-accent-pink/30 mb-5">
-                                    <h3 class="text-xs font-semibold text-accent-purple">...</h3>
-                                </div>
-                                <p class="text-xs text-gray-600 leading-relaxed mb-2" style="text-align: justify;">
-                                    ....
-                                </p><br>
 
                                 <div class="flex items-center gap-2">
                                     <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
@@ -6045,51 +6160,30 @@
                                     <div>
                                         <div class="flex items-start gap-0.5">
                                             <span class="text-accent-purple font-bold text-xs flex-shrink-0">01</span>
-                                            <p class="text-xs text-gray-600 font-semibold">...</p>
+                                            <p class="text-xs text-gray-600 font-semibold">Pembelajaran Inovatif</p>
                                         </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">....</p>
+                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">Merancang strategi, metode, maupun teknologi baru untuk meningkatkan efektivitas pembelajaran.</p>
                                     </div>
                                     <div>
                                         <div class="flex items-start gap-0.5">
                                             <span class="text-accent-purple font-bold text-xs flex-shrink-0">02</span>
-                                            <p class="text-xs text-gray-600 font-semibold">...</p>
+                                            <p class="text-xs text-gray-600 font-semibold">Model GRR</p>
                                         </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">....</p>
+                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">Kerangka pelepasan tanggung jawab belajar secara bertahap hingga murid mampu belajar mandiri.</p>
                                     </div>
                                     <div>
                                         <div class="flex items-start gap-0.5">
                                             <span class="text-accent-purple font-bold text-xs flex-shrink-0">03</span>
-                                            <p class="text-xs text-gray-600 font-semibold">...</p>
+                                            <p class="text-xs text-gray-600 font-semibold">PTK</p>
                                         </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">...</p>
+                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">Proses ilmiah melalui perencanaan, tindakan, observasi, dan refleksi untuk memperbaiki pembelajaran.</p>
                                     </div>
                                     <div>
                                         <div class="flex items-start gap-0.5">
                                             <span class="text-accent-purple font-bold text-xs flex-shrink-0">04</span>
-                                            <p class="text-xs text-gray-600 font-semibold">...</p>
+                                            <p class="text-xs text-gray-600 font-semibold">ZPD & Instrumen Data</p>
                                         </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">....</p>
-                                    </div>
-                                    <div>
-                                        <div class="flex items-start gap-0.5">
-                                            <span class="text-accent-purple font-bold text-xs flex-shrink-0">05</span>
-                                            <p class="text-xs text-gray-600 font-semibold">...</p>
-                                        </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">....</p>
-                                    </div>
-                                    <div>
-                                        <div class="flex items-start gap-0.5">
-                                            <span class="text-accent-purple font-bold text-xs flex-shrink-0">06</span>
-                                            <p class="text-xs text-gray-600 font-semibold">...</p>
-                                        </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">....</p>
-                                    </div>
-                                    <div>
-                                        <div class="flex items-start gap-0.5">
-                                            <span class="text-accent-purple font-bold text-xs flex-shrink-0">07</span>
-                                            <p class="text-xs text-gray-600 font-semibold">...</p>
-                                        </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">....</p>
+                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">Memahami kebutuhan bantuan murid sekaligus mengumpulkan data kuantitatif maupun kualitatif sebagai dasar evaluasi.</p>
                                     </div>
                                 </div><br>
 
@@ -6097,50 +6191,42 @@
                                     <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M12 3C8 7 4 9 4 12c0 2 3 4 8 4s8-2 8-4c0-3-4-5-8-9z"/><path d="M12 3C16 7 20 9 20 12c0 2-3 4-8 4s-8-2-8-4c0-3 4-5 8-9z"/><path d="M12 16c0 2-1 4-3 5s-3-1-3-3 1-4 3-5 3 1 3 3z"/><path d="M12 16c0 2 1 4 3 5s3-1 3-3-1-4-3-5-3 1-3 3z"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><path d="M8 8l1 1M16 8l-1 1M8 16l1-1M16 16l-1-1"/></svg>
                                     <h3 class="text-sm font-semibold text-accent-purple">Change</h3>
                                 </div>
-                                <p class="text-xs text-gray-600 leading-relaxed" style="text-align: justify">...</p>
+
                                 <div class="grid sm:grid-cols-1 gap-1">
                                     <div class="flex items-start gap-1">
                                         <span class="text-accent-purple font-bold text-xs">01</span>
-                                        <p class="text-xs text-gray-600">...</p>
+                                        <p class="text-xs text-gray-600">Mengembangkan pembelajaran berbasis proyek dan masalah nyata yang relevan dengan dunia kerja murid SMK.</p>
                                     </div>
                                     <div class="flex items-start gap-1">
                                         <span class="text-accent-purple font-bold text-xs">02</span>
-                                        <p class="text-xs text-gray-600">...</p>
+                                        <p class="text-xs text-gray-600">Menerapkan scaffolding bertahap untuk menumbuhkan kemandirian belajar.</p>
                                     </div>
                                     <div class="flex items-start gap-1">
                                         <span class="text-accent-purple font-bold text-xs">03</span>
-                                        <p class="text-xs text-gray-600">...</p>
+                                        <p class="text-xs text-gray-600">Mengintegrasikan Canva, Google Classroom, dan kuis interaktif sebagai media eksplorasi dan kreasi murid.</p>
                                     </div>
                                     <div class="flex items-start gap-1">
                                         <span class="text-accent-purple font-bold text-xs">04</span>
-                                        <p class="text-xs text-gray-600">...</p>
+                                        <p class="text-xs text-gray-600">Menggunakan jurnal belajar, self-assessment, dan peer assessment sebagai bagian dari penilaian formatif.</p>
                                     </div>
                                     <div class="flex items-start gap-1">
                                         <span class="text-accent-purple font-bold text-xs">05</span>
-                                        <p class="text-xs text-gray-600">...</p>
+                                        <p class="text-xs text-gray-600">Melakukan refleksi rutin serta menyusun PTK sebagai upaya perbaikan pembelajaran secara berkelanjutan.</p>
                                     </div>
                                     <div class="flex items-start gap-1">
                                         <span class="text-accent-purple font-bold text-xs">06</span>
-                                        <p class="text-xs text-gray-600">...</p>
-                                    </div>
-                                    <div class="flex items-start gap-1">
-                                        <span class="text-accent-purple font-bold text-xs">07</span>
-                                        <p class="text-xs text-gray-600">...</p>
-                                    </div>
-                                    <div class="flex items-start gap-1">
-                                        <span class="text-accent-purple font-bold text-xs">08</span>
-                                        <p class="text-xs text-gray-600">...</p>
+                                        <p class="text-xs text-gray-600">Membangun iklim kelas yang aman sehingga murid berani mencoba, berdiskusi, dan mengekspresikan ide kreatif.</p>
                                     </div>
                                 </div>
                             </div>
                             <!-- Konten Analisis Artefak -->
-                             <div x-show="activeTab === 'artefakGM'" x-transition:enter.duration.300ms>
+                             <div x-show="activeTab === 'artefakPKI'" x-transition:enter.duration.300ms>
                                 <div class="flex items-center gap-2">
                                     <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><circle cx="12" cy="12" r="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
                                     <h3 class="text-sm font-semibold text-accent-purple">Mengapa saya pilih?</h3>
                                 </div>
                                 <p class="text-xs text-gray-600 leading-relaxed" style="text-align: justify">
-                                    ...
+                                    Melalui artefak ini, saya belajar bahwa permasalahan pembelajaran tidak cukup dilihat dari gejala yang tampak. Saya perlu memahami faktor-faktor yang melatarbelakanginya sebelum menentukan tindakan yang tepat. Proses tersebut juga membantu saya menghubungkan konsep pembelajaran kreatif dan inovatif dengan situasi pembelajaran yang nyata.
                                 </p><br>
                                 <div class="flex items-center gap-2">
                                     <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M12 20s-4-4-6-6c-2-2-2-4 0-6s4-2 6 2c2-4 4-4 6-2s2 4 0 6c-2 2-6 6-6 6z"/><path d="M12 20s4-4 6-6c2-2 2-4 0-6s-4-2-6 2c-2-4-4-4-6-2s-2 4 0 6c2 2 6 6 6 6z"/><line x1="12" y1="8" x2="12" y2="20"/></svg>
@@ -6152,28 +6238,30 @@
                                             <span class="text-accent-purple font-bold text-xs flex-shrink-0">01</span>
                                             <p class="text-sm text-gray-600 font-semibold">Connection</p>
                                         </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">...</p>
+                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">Artefak ini menghubungkan materi perkuliahan dengan permasalahan yang ditemukan dalam pembelajaran. Proses identifikasi menunjukkan adanya kesenjangan antara kondisi ideal, murid belajar secara mandiri dan antusias, dengan kondisi nyata, seperti rendahnya motivasi, keaktifan, fokus, dan tanggung jawab belajar. Dari sini, saya belajar bahwa memahami konteks pembelajaran menjadi langkah awal sebelum menentukan tindakan.</p>
                                     </div>
                                     <div>
                                         <div class="flex items-start gap-0.5">
                                             <span class="text-accent-purple font-bold text-xs flex-shrink-0">02</span>
                                             <p class="text-sm text-gray-600 font-semibold">Challenge</p>
                                         </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">...</p>
+                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">Tantangan yang saya temukan adalah memahami bahwa satu permasalahan dapat memiliki beberapa penyebab yang saling berkaitan. Melalui LK 1.1 dan LK 1.2, saya belajar menelusuri masalah dari gejala yang terlihat menuju faktor yang melatarbelakanginya. Rendahnya motivasi, misalnya, dikaitkan dengan kurangnya minat dan kemampuan regulasi diri peserta didik. Proses ini mendorong saya untuk tidak terburu-buru menentukan solusi sebelum memahami masalah secara lebih menyeluruh.</p>
                                     </div>
                                     <div>
                                         <div class="flex items-start gap-0.5">
                                             <span class="text-accent-purple font-bold text-xs flex-shrink-0">03</span>
                                             <p class="text-sm text-gray-600 font-semibold">Concept</p>
                                         </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">...</p>
+                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">
+                                            Pada LK 1.3, proses analisis diarahkan untuk menentukan akar penyebab masalah. Rendahnya motivasi belajar dan kemampuan regulasi diri dipilih sebagai masalah utama karena berkaitan dengan munculnya masalah lain, seperti kurangnya fokus, keaktifan, dan tanggung jawab belajar. Selanjutnya, pada Analisis Pemecahan Masalah, beberapa alternatif solusi dipertimbangkan, seperti: Student-Centered Learning, Contextual Learning, Media Interaktif, Pembelajaran Diferensiasi, dan Pengelolaan Teknologi.
+                                        </p>
                                     </div>
                                     <div>
                                         <div class="flex items-start gap-0.5">
                                             <span class="text-accent-purple font-bold text-xs flex-shrink-0">04</span>
                                             <p class="text-sm text-gray-600 font-semibold">Change</p>
                                         </div>
-                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">...</p>
+                                        <p class="text-xs text-gray-600 pl-5" style="text-align: justify;">Dari proses analisis tersebut, saya memperoleh gambaran tentang perubahan yang perlu dipertimbangkan dalam pembelajaran. Pembelajaran tidak hanya diarahkan pada penyampaian materi, tetapi juga pada bagaimana peserta didik dapat terlibat, belajar secara mandiri, memahami manfaat pembelajaran, dan menggunakan teknologi secara positif. Karena itu, pendekatan yang berpusat pada peserta didik dan kontekstual menjadi pilihan utama, sementara media interaktif, penguatan positif, diferensiasi, serta pengelolaan teknologi menjadi bagian pendukung dalam proses pembelajaran.</p>
                                     </div>
                                 </div>
                             </div>
