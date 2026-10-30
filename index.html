@@ -95,7 +95,7 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
         }
 
         #preloader.hidden {
@@ -313,7 +313,7 @@
             width: 0%;
             background: linear-gradient(90deg, #D4A5A5, #C38D9E, #E8A87C);
             border-radius: 10px;
-            animation: load-progress 2.5s ease-in-out forwards;
+            animation: load-progress 0.8s ease-in-out forwards;
             position: relative;
         }
 
@@ -418,24 +418,24 @@
 
         .glass {
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             border: 1px solid rgba(216, 216, 216, 0.5);
             box-shadow: 0 8px 32px rgba(28, 28, 28, 0.06);
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.70);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             border: 1px solid rgba(216, 216, 216, 0.4);
             box-shadow: 0 4px 20px rgba(28, 28, 28, 0.04);
         }
 
         .navbar-glass {
             background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             border-bottom: 1px solid rgba(216, 216, 216, 0.5);
         }
 
@@ -867,7 +867,7 @@
 
         .lightbox-overlay {
             background: rgba(28, 28, 28, 0.92);
-            backdrop-filter: blur(8px);
+            backdrop-filter: none;
         }
 
         .gradient-text {
@@ -1249,7 +1249,7 @@
         /* Info Card - Premium Style */
         .info-card-premium {
             background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(250,248,245,0.9));
-            backdrop-filter: blur(12px);
+            backdrop-filter: none;
             border: 1px solid rgba(212, 165, 165, 0.2);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
@@ -1399,7 +1399,7 @@
         /* --- Lokasi PPL Styles --- */
         .profile-section {
             background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(250,248,245,0.9));
-            backdrop-filter: blur(12px);
+            backdrop-filter: none;
             border: 1px solid rgba(212, 165, 165, 0.2);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
@@ -2123,58 +2123,22 @@
             }
         }
 
-        /* ===== KURSUS KUPU-KUPU ===== */
-        * {
-            cursor: none !important;
+        /* Kursor bawaan browser digunakan agar interaksi lebih ringan. */
+        /* Kurangi beban animasi dan hormati preferensi perangkat pengguna. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
         }
-
-        /* Sembunyikan kursor default pada semua elemen */
-        body, a, button, input, textarea, select, [role="button"], [role="link"] {
-            cursor: none !important;
-        }
-
-        /* Canvas untuk kursor kupu-kupu */
-        #butterfly-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 99999;
-            background: transparent !important;
-        }
-
-        /* Efek tambahan untuk memberikan kesan lebih hidup */
-        #butterfly-cursor canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-            background: transparent !important;
-        }
-        /* ===== END KURSUS KUPU-KUPU ===== */
     </style>
 </head>
 
 <body x-data="portfolioApp()">
-    <!-- Canvas Kursor Kupu-Kupu -->
-<div id="butterfly-cursor">
-    <canvas id="cursorCanvas"></canvas>
-</div>
     <!-- ============ PRELOADER ============ -->
     <div id="preloader" x-data="preloader()" x-init="init()" :class="isHidden ? 'hidden' : ''">
-        <div class="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
         <div class="preloader-container">
             <!-- Kupu-Kupu Animation -->
             <div class="butterfly-wrapper">
@@ -3550,11 +3514,10 @@
                                     artefakSlide: 0,
                                     analisisRPP: {
                                         RPPSiklus1: [
-                                            { title: 'Analisis Perencanaan Praktik Pembelajaran Mandiri', desc: 'Setelah melaksanakan praktik pembelajaran mandiri, saya menganalisis bahwa perencanaan pembelajaran Informatika kelas X Tekstil B dengan model Problem-Based Learning (PBL) dan pendekatan Pembelajaran Mendalam telah memberikan arah bagi pelaksanaan pembelajaran. Kegiatan pemantik, pemecahan masalah, pengerjaan LKPD, presentasi, dan asesmen dirancang untuk mendukung keterlibatan peserta didik. Berdasarkan pelaksanaan tersebut, saya menilai bahwa keselarasan antara perencanaan dan kondisi nyata di kelas menjadi faktor penting dalam mencapai tujuan pembelajaran. Pengelolaan waktu, kejelasan instruksi, dan penyesuaian kegiatan dengan kebutuhan peserta didik perlu diperhatikan agar setiap tahapan dapat berjalan secara efektif.' },
-                                            { title: 'Analisis Materi Ajar', desc: 'Materi Algoritma Standar telah menghubungkan konsep dasar algoritma dan representasinya dalam bentuk narasi atau deskriptif dengan permasalahan sehari-hari. Penggunaan contoh yang kontekstual dapat membantu peserta didik memahami manfaat algoritma dalam kehidupan nyata. Meskipun demikian, saya melihat perlunya penyajian materi secara lebih bertahap, mulai dari pemahaman konsep hingga latihan menyusun langkah-langkah algoritma yang runtut dan logis. Dengan demikian, materi tidak hanya membantu peserta didik memahami definisi, tetapi juga mengembangkan kemampuan menerapkan konsep.' },
-                                            { title: 'Hasil Belajar', desc: 'Penggunaan website pembelajaran, Wayground, Canva, dan LCD proyektor mendukung penyampaian materi, penyajian visual, serta pelaksanaan asesmen digital. Kombinasi media tersebut memberikan variasi dalam proses pembelajaran dan membantu penyajian informasi secara lebih menarik.' },
+                                            { title: 'Analisis RPP Siklus 1 - Bagian 1', desc: 'Isi analisis untuk siklus 1 bagian pertama...' },
+                                            { title: 'Analisis RPP Siklus 1 - Bagian 2', desc: 'Isi analisis untuk siklus 1 bagian kedua...' },
+                                            { title: 'Analisis RPP Siklus 1 - Bagian 2', desc: 'Isi analisis untuk siklus 1 bagian kedua...' },
                                         ],
-                                        
                                         RPPSiklus2: [
                                             { title: 'Analisis RPP Siklus 2 - Bagian 1', desc: 'Isi analisis untuk siklus 2 bagian pertama...' },
                                             { title: 'Analisis RPP Siklus 2 - Bagian 2', desc: 'Isi analisis untuk siklus 2 bagian kedua...' },
@@ -4452,7 +4415,7 @@
                                 </div>
                                 <div class="mt-3 flex items-center gap-1 text-xs text-accent-purple font-medium flex-row-reverse">
                                     <svg class="w-3 h-3 group-hover:translate-x-1 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                    <span style="font-size: xx-small;" class="cursor-not-allowed" title="COMING SOON">Selengkapnya</span>
+                                    <span style="font-size: xx-small;">Selengkapnya</span>
                                 </div>
                             </a>
                             <a @click="page = 'refleksiPPLM'" class="artefak-item flex items-center gap-2" title="Klik Untuk Membuka Refleksi Mata Kuliah Praktik Pengalaman Lapangan (PPL) Mandiri">
@@ -4464,7 +4427,7 @@
                                 </div>
                                 <div class="mt-3 flex items-center gap-1 text-xs text-accent-purple font-medium flex-row-reverse">
                                     <svg class="w-3 h-3 group-hover:translate-x-1 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                    <span style="font-size: xx-small;" class="cursor-not-allowed" title="COMING SOON">Selengkapnya</span>
+                                    <span style="font-size: xx-small;">Selengkapnya</span>
                                 </div>
                             </a>
                             <a @click="page = 'refleksiPK'" class="artefak-item flex items-center gap-2" title="Klik Untuk Membuka Refleksi Mata Kuliah Projek Kepemimpinan">
@@ -4476,7 +4439,7 @@
                                 </div>
                                 <div class="mt-3 flex items-center gap-1 text-xs text-accent-purple font-medium flex-row-reverse">
                                     <svg class="w-3 h-3 group-hover:translate-x-1 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                    <span style="font-size: xx-small;" class="cursor-not-allowed" title="COMING SOON">Selengkapnya</span>
+                                    <span style="font-size: xx-small;">Selengkapnya</span>
                                 </div>
                             </a>
                             <a @click="page = 'refleksiPKB'" class="artefak-item flex items-center gap-2" title="Klik Untuk Membuka Refleksi Mata Kuliah Pengembangan Keprofesian Berkelanjutan">
@@ -4488,7 +4451,7 @@
                                 </div>
                                 <div class="mt-3 flex items-center gap-1 text-xs text-accent-purple font-medium flex-row-reverse">
                                     <svg class="w-3 h-3 group-hover:translate-x-1 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                    <span style="font-size: xx-small;" class="cursor-not-allowed" title="COMING SOON">Selengkapnya</span>
+                                    <span style="font-size: xx-small;">Selengkapnya</span>
                                 </div>
                             </a>
                         </div>
@@ -7632,142 +7595,6 @@
                 }
             }
         }
-    </script>
-   
-    <!-- ===== SCRIPT KURSUS KUPU-KUPU ===== -->
-    <script>
-    (function() {
-        const canvas = document.getElementById('cursorCanvas');
-        const ctx = canvas.getContext('2d');
-
-        // Ukuran canvas mengikuti layar
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        // Posisi kursor
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-
-        // Update posisi kursor
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        // Fungsi menggambar kupu-kupu
-        function drawButterfly(x, y, size, flap) {
-            ctx.save();
-            ctx.translate(x, y);
-            
-            // Warna gradasi sayap
-            const gradKiri = ctx.createLinearGradient(-size/2, 0, 0, -size/1.5);
-            gradKiri.addColorStop(0, '#D4A5A5');
-            gradKiri.addColorStop(1, '#C38D9E');
-            
-            const gradKanan = ctx.createLinearGradient(0, 0, size/2, -size/1.5);
-            gradKanan.addColorStop(0, '#E8A87C');
-            gradKanan.addColorStop(1, '#D4A5A5');
-
-            // Sayap kiri
-            ctx.save();
-            ctx.rotate(-flap);
-            ctx.beginPath();
-            ctx.ellipse(-size * 0.5, 0, size * 0.55, size * 0.45, -0.2, 0, Math.PI * 2);
-            ctx.fillStyle = gradKiri;
-            ctx.globalAlpha = 0.9;
-            ctx.fill();
-            // Detail sayap
-            ctx.globalAlpha = 0.3;
-            for (let i = 0; i < 3; i++) {
-                ctx.beginPath();
-                ctx.arc(-size * 0.5 + i * size * 0.15, -size * 0.1, size * 0.08, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255,255,255,0.4)';
-                ctx.fill();
-            }
-            ctx.restore();
-
-            // Sayap kanan
-            ctx.save();
-            ctx.rotate(flap);
-            ctx.beginPath();
-            ctx.ellipse(size * 0.5, 0, size * 0.55, size * 0.45, 0.2, 0, Math.PI * 2);
-            ctx.fillStyle = gradKanan;
-            ctx.globalAlpha = 0.9;
-            ctx.fill();
-            ctx.globalAlpha = 0.3;
-            for (let i = 0; i < 3; i++) {
-                ctx.beginPath();
-                ctx.arc(size * 0.5 + i * size * 0.15, -size * 0.1, size * 0.08, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255,255,255,0.4)';
-                ctx.fill();
-            }
-            ctx.restore();
-
-            // Badan
-            ctx.globalAlpha = 1;
-            ctx.shadowColor = 'rgba(0,0,0,0.15)';
-            ctx.shadowBlur = 8;
-            ctx.beginPath();
-            ctx.ellipse(0, 0, size * 0.06, size * 0.35, 0, 0, Math.PI * 2);
-            ctx.fillStyle = '#2C3E50';
-            ctx.fill();
-            ctx.shadowBlur = 0;
-
-            // Kepala
-            ctx.beginPath();
-            ctx.arc(0, -size * 0.35, size * 0.1, 0, Math.PI * 2);
-            ctx.fillStyle = '#2C3E50';
-            ctx.fill();
-
-            // Mata
-            ctx.fillStyle = 'white';
-            ctx.beginPath();
-            ctx.arc(-size * 0.04, -size * 0.37, size * 0.04, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(size * 0.04, -size * 0.37, size * 0.04, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = '#1a1a2e';
-            ctx.beginPath();
-            ctx.arc(-size * 0.06, -size * 0.38, size * 0.02, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(size * 0.02, -size * 0.38, size * 0.02, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.restore();
-        }
-
-        // Animasi
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Animasi sayap mengepak
-            const wingAngle = Math.sin(Date.now() / 150) * 0.4 + 0.3;
-            
-            // Ukuran kupu-kupu dengan efek bernapas
-            const size = 25 + Math.sin(Date.now() / 1000) * 3;
-            
-            // Gambar kupu-kupu di posisi kursor
-            drawButterfly(mouseX, mouseY, size, wingAngle);
-            
-            // Efek glow di sekitar kupu-kupu
-            const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 60);
-            gradient.addColorStop(0, 'rgba(212, 165, 165, 0.12)');
-            gradient.addColorStop(1, 'rgba(212, 165, 165, 0)');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(mouseX - 60, mouseY - 60, 120, 120);
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-    })();
     </script>
 </body>
 </html>
